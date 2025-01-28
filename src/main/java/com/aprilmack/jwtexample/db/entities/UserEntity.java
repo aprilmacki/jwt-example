@@ -1,6 +1,7 @@
 package com.aprilmack.jwtexample.db.entities;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -8,6 +9,7 @@ import java.util.Date;
 
 @Table(name = "USERS")
 @Entity
+@Data
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
