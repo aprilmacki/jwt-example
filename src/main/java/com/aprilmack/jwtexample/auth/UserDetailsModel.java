@@ -5,15 +5,19 @@ import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.Instant;
 import java.util.Collection;
 import java.util.List;
 
 @Data
 @Builder
 public class UserDetailsModel implements UserDetails {
-    private final int id;
+    private final long id;
     private final String password;
     private final String email;
+    private final String fullName;
+    private Instant createdAt;
+    private Instant updatedAt;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

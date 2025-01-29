@@ -1,0 +1,17 @@
+package com.aprilmack.jwtexample.controllers.auth.dtos;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Builder;
+import lombok.Data;
+import lombok.extern.jackson.Jacksonized;
+
+import java.time.Instant;
+
+@Data
+@Builder
+@Jacksonized
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class LoginResponse {
+    final String token;
+    final Instant expiresAt;
+}
