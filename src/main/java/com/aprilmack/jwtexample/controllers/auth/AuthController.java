@@ -54,6 +54,7 @@ public class AuthController {
         userEntity.setFullName(signupRequest.getFullName());
         userRepository.saveAndFlush(userEntity);
 
+        // TODO: MapStruct
         return ResponseEntity.ok(
                 SignupResponse.builder()
                         .id(userEntity.getId())
@@ -78,6 +79,7 @@ public class AuthController {
                     .build();
         }
         final UserEntity userEntity = maybeUserEntity.get();
+        // TODO: MapStruct
         final UserDetails userDetails = UserDetailsModel.builder()
                 .id(userEntity.getId())
                 .password(userEntity.getPassword())
