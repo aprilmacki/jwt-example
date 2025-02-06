@@ -2,6 +2,8 @@ package com.aprilmack.jwtexample.config;
 
 import com.aprilmack.jwtexample.auth.UserDetailsModel;
 import com.aprilmack.jwtexample.db.repositories.UserRepository;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,10 +16,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-public class AppConfig {
+public class BaseAppConfig {
     private final UserRepository userRepository;
 
-    public AppConfig(final UserRepository userRepository) {
+    public BaseAppConfig(final UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -51,5 +53,13 @@ public class AppConfig {
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder);
         return authProvider;
+    }
+
+    @Bean
+    public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
+        return builder -> {
+            builder.modulesToInstall(new JavaTimeModule());
+            builder.simpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        };
     }
 }
