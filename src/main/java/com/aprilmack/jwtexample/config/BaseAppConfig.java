@@ -30,6 +30,9 @@ public class BaseAppConfig {
                         .id(entity.getId())
                         .password(entity.getPassword())
                         .email(entity.getEmail())
+                        .fullName(entity.getFullName())
+                        .updatedAt(entity.getUpdatedAt())
+                        .createdAt(entity.getCreatedAt())
                         .build())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }

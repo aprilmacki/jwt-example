@@ -49,7 +49,7 @@ public class JwtService {
     public boolean isTokenValid(final String token, final UserDetails userDetails) {
         final String username = extractUsername(token);
         return username.equals(userDetails.getUsername()) &&
-                !extractClaim(token, Claims::getExpiration).before(new Date());
+                !extractClaim(token, Claims::getExpiration).before(Date.from(Instant.now(clock)));
     }
 
     private String buildToken(
@@ -76,6 +76,7 @@ public class JwtService {
         return Jwts
                 .parserBuilder()
                 .setSigningKey(getSigningKey())
+                .setClock(() -> Date.from(Instant.now(clock)))
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
